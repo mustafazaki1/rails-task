@@ -1,0 +1,260 @@
+swagger: "2.0"
+info:
+  description: This is a specification file for application service
+  version: 1.0.0
+  title: application Service
+schemes:
+  - http
+paths:
+  /applications:
+    post:
+      tags:
+        - "applications"
+      summary: "add new application"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "app_name"
+          description: "application name"
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: application has been saved successfully
+          schema:
+            $ref: '#/definitions/applicationDTO'
+    get:
+      tags:
+        - "applications"
+      summary: "get all applications"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "app_name"
+          description: "application name"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/applicationDTO'
+  /applications/{token}:
+    get:
+      tags:
+        - "applications"
+      summary: "get applications by token"
+      produces:
+        - application/json
+      parameters:
+        - in: "path"
+          name: "token"
+          type: "string"
+          format: "uuid"
+          description: "application token"
+          required: true
+      responses:
+        200:
+          description: "ok"
+          schema:
+            $ref: '#/definitions/applicationDTO'
+    put:
+      tags:
+        - "applications"
+      summary: "get applications by token"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "path"
+          name: "token"
+          type: "string"
+          format: "uuid"
+          description: "application token"
+          required: true
+        - in: "body"
+          name: "app_name"
+          description: "application name"
+          required: true
+          schema:
+            type: string
+      responses:
+        201:
+          description: application has been saved successfully
+          schema:
+            $ref: '#/definitions/applicationDTO'
+  /chat:
+    post:
+      tags:
+        - "chat"
+      summary: "add new chat"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "data"
+          schema:
+            type: object
+            properties:
+              app_token:
+                type: string
+                format: "uuid"
+      responses:
+        201:
+          description: chat has been saved successfully
+          schema:
+            $ref: '#/definitions/chatDTO'
+
+  /message:
+    post:
+      tags:
+        - "message"
+      summary: "add new message"
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "data"
+          schema:
+            type: object
+            properties:
+              app_token:
+                type: string
+                format: "uuid"
+              chat_number:
+                type: integer
+                format: "int32"
+              body:
+                type: "string"
+      responses:
+        200:
+          description: message has been saved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/messageDTO'
+  /message/applications/{app_token}/chat/{chat_number}:
+    get:
+      tags:
+        - "message"
+      summary: "get message by chat number and app toked"
+      produces:
+        - application/json
+      parameters:
+        - in: "path"
+          name: "app_token"
+          type: "string"
+          format: "uuid"
+          description: "application token"
+          required: true
+        - in: "path"
+          name: "chat_number"
+          type: "integer"
+          format: "int32"
+          description: "chat number"
+          required: true
+      responses:
+        200:
+          description: chats messages
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/messageDTO'
+  /message/applications/{app_token}/chat:
+    get:
+      tags:
+        - "message"
+      summary: "get message by and app toked "
+      produces:
+        - application/json
+      parameters:
+        - in: "path"
+          name: "app_token"
+          type: "string"
+          format: "uuid"
+          description: "application token"
+          required: true
+      responses:
+        200:
+          description: chats messages
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/messageDTO'
+
+  /applications/{app_token}/chat/{chat_number}/search-message:
+    get:
+      tags:
+        - "message"
+      summary: "get message by chat number and app toked"
+      produces:
+        - application/json
+      parameters:
+        - in: "path"
+          name: "app_token"
+          type: "string"
+          format: "uuid"
+          description: "application token"
+          required: true
+        - in: "path"
+          name: "chat_number"
+          type: "integer"
+          format: "int32"
+          description: "chat number"
+          required: true
+        - in: "body"
+          name: "message_body"
+          schema:
+            type: object
+            properties:
+              body:
+                type: "string"
+      responses:
+        200:
+          description: chats messages
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/messageDTO'
+definitions:
+  applicationDTO:
+    properties:
+      data:
+        type: object
+        properties:
+          app_name:
+            type: "string"
+          token:
+            type: "string"
+  chatDTO:
+    properties:
+      data:
+        type: object
+        properties:
+          chat_number:
+            type: "integer"
+            format: "int32"
+
+  messageDTO:
+    properties:
+      data:
+        type: object
+        properties:
+          body:
+            type: "string"
+          message_number:
+            type: "integer"
+            format: "int32"
