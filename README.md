@@ -5,6 +5,7 @@ Instabug Back End Challenge
 ## NEEDED DEPENDENCIES
 ```bash
 dokcer, Dokcer machine, docker compose, virtualbox
+you need to create docker-machine
 ```
 ## RUN SERVER
 ```bash
