@@ -1,19 +1,47 @@
 # Task RAILS 5
 
-Instabug Back End Challenge
+## run using docker-compose up
 
-## NEEDED DEPENDENCIES
+NEEDED DEPENDENCIES
 ```bash
 dokcer, Dokcer machine, docker compose, virtualbox
 you need to create docker-machine
 ```
-## RUN SERVER
+RUN SERVER
 ```bash
 docker-compose up
 ```
 
-## APIS
+
+##To run normal
+
+NEEDED DEPENDENCIES
 ```bash
-you will find swagger.ymal descripe each api
+mysql 
+elasticsearch
+```
+DataBase
+```bash
+username: root
+password: root
+database name : taskbug_development
+```
+RUN SERVER
+```bash
+bundle install
+rails db:migrate
+bundle exec whenever --update-crontab
+rails s
+```
+
+cron job to update database counters
+```bash
+will run every 30 min
+```
+
+
+APIS
+```bash
+you will find application-swagger.yml descripe each api
 ```
 
