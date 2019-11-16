@@ -1,19 +1,18 @@
-# SIMPLE RAILS 5 REST API
+# Task RAILS 5
 
-Example of a basic REST API to perform CRUD functions. Uses MySQL by default. Please add your own database and credentials
+Instabug Back End Challenge
 
-## INSTALL DEPENDENCIES
+## NEEDED DEPENDENCIES
 ```bash
-$ bundle install
+dokcer, Dokcer machine, docker compose, virtualbox
 ```
-
-## RUN MIGRATION
-```bash
-$ rails db:migrate
-```
-
 ## RUN SERVER
 ```bash
-$ rails s
+docker-compose up
+```
+
+## APIS
+```bash
+you will find swagger.ymal descripe each api
 ```
 
