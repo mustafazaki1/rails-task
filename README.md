@@ -42,6 +42,6 @@ will run every 30 min
 
 APIS
 ```bash
-you will find application-swagger.yml descripe each api
+you will find application-swagger.yaml descripe each api
 ```
 
